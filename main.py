@@ -28,6 +28,12 @@ for tono, acordes_tono in tonalidades_mayores.items():
         return f"Tonalidad: {tono} mayor | Progresión: {' - '.join(grados_encontrados)}"
 return "No encontré la tonalidad. Prueba con acordes básicos o agrega más tonalidades al código."
 
+# Agrega esto a tus diccionarios
+tonalidades_menores = {
+    "Am": ["Am", "Bdim", "C", "Dm", "Em", "F", "G"], # i ii° III iv v VI VII
+}
+grados_menores = ["i", "ii°", "III", "iv", "v", "VI", "VII"]
+
 PRUEBA AQUÍ: Cambia esta línea
 entrada = "G D Em C"
 resultado = analizar_progresion(entrada)
