@@ -1,25 +1,35 @@
-# Analizador de Progresiones Musicales 🎵
+Base de datos = tu círculo de quintas básico
+Cada tonalidad mayor: [I, ii, iii, IV, V, vi, vii°]
+tonalidades_mayores = {
+"C": ["C", "Dm", "Em", "F", "G", "Am", "Bdim"],
+"G": ["G", "Am", "Bm", "C", "D", "Em", "F#dim"],
+"D": ["D", "Em", "F#m", "G", "A", "Bm", "C#dim"],
+"A": ["A", "Bm", "C#m", "D", "E", "F#m", "G#dim"],
+"E": ["E", "F#m", "G#m", "A", "B", "C#m", "D#dim"],
+"F": ["F", "Gm", "Am", "Bb", "C", "Dm", "Edim"]
+}
 
-Script en Python que identifica la tonalidad y el nombre de una progresión de acordes.
+grados_romanos = ["I", "ii", "iii", "IV", "V", "vi", "vii°"]
 
-Como vengo de teoría musical, quise automatizar el análisis armónico básico.
+def analizar_progresion(acordes_usuario):
+acordes_usuario = [acorde.strip() for acorde in acordes_usuario.split(" ")]
 
-### ¿Qué hace?
-Input: `C G Am F`  
-Output: `Tonalidad: C mayor | Progresión: I - V - vi - IV`  
-`Dato: Eje de 4 acordes. Pop-punk, 80% de hits 2000s`
+for tono, acordes_tono in tonalidades_mayores.items():
+    grados_encontrados = []
+    es_esta_tonalidad = True
+    for acorde in acordes_usuario:
+        if acorde in acordes_tono:
+            indice = acordes_tono.index(acorde)
+            grados_encontrados.append(grados_romanos[indice])
+        else:
+            es_esta_tonalidad = False
+            break
+    if es_esta_tonalidad:
+        return f"Tonalidad: {tono} mayor | Progresión: {' - '.join(grados_encontrados)}"
+return "No encontré la tonalidad. Prueba con acordes básicos o agrega más tonalidades al código."
 
-### Tech usado
-Python 3, diccionarios, manejo de strings, lógica condicional.
-
-### Cómo correrlo
-1. Clona el repo
-2. `python main.py`
-3. Modifica la variable `entrada` con tus acordes
-
-### Próximos pasos
-- [ ] Agregar modo menor
-- [ ] Deploy con Streamlit para usar en web
-- [ ] Conectar API de Spotify
-
-Hecho por [Brenda] desde Mazatlán 🇲🇽
+PRUEBA AQUÍ: Cambia esta línea
+entrada = "G D Em C"
+resultado = analizar_progresion(entrada)
+print(f"Entrada: {entrada}")
+print(f"Resultado: {resultado}")
