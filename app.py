@@ -53,5 +53,25 @@ if st.button("Analizar"):
     else:
         st.warning("Escribe algunos acordes primero")
 
-st.markdown("---")
+mport pandas as pd
+
+# Simulemos datos de 5 canciones. Después los jalas de Spotify real
+datos = {
+    'cancion': ['Canción 1', 'Canción 2', 'Canción 3', 'Canción 4', 'Canción 5'],
+    'progresion': ['I-V-vi-IV', 'vi-IV-I-V', 'I-V-vi-IV', 'ii-V-I', 'I-V-vi-IV'],
+    'bpm': [120, 128, 122, 90, 125],
+    'tono': ['C', 'G', 'C', 'D', 'G']
+}
+
+df = pd.DataFrame(datos)
+
+# Aquí usas tu cerebro de patrones:
+print("Progresión más usada:")
+print(df['progresion'].value_counts()) # Es como contar cuántas veces sale un motivo
+
+print("\nBPM promedio:")
+print(df['bpm'].mean()) # El 'tempo' del dataset
+
+print("\nTono más común:")
+print(df['tono'].mode()[0]) # La 'tónica' del datasetst.markdown("---")
 st.caption("Hecho con Python + Streamlit por Brenve desde Mazatlán 🇲🇽")
